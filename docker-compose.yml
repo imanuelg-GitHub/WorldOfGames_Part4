@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+
+  imanuelg_worldofgames4:
+
+    build:
+      context: ./
+
+    image: imanuelg/worldofgames_part4:v0.1
+
+    ports:
+     - "7000:6001"
