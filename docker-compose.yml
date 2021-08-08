@@ -4,10 +4,9 @@ services:
 
   imanuelg_worldofgames4:
 
-    build:
-      context: ./
+    build: .
 
-    image: imanuelg/worldofgames_part4:v0.1
+    image: imanuelg/worldofgamespart4
 
     ports:
      - "7000:6001"
