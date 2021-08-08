@@ -4,9 +4,9 @@ from selenium import webdriver
 def test_scores_service(url):
     Edge_driver = webdriver.Edge(executable_path="C:/Users/imanu/Downloads/edgedriver_win32/msedgedriver.exe")
     Edge_driver.get(url)
-    score = Edge_driver.find_element_by_xpath("/html/body/h1")
+    score = Edge_driver.find_element_by_xpath("/html/body/h1").text
     Edge_driver.close()
-    return int(str(score))
+    return int(score)
     #if 1 <= int(score) <= 1000:
     #    return True
     #return False
