@@ -2,6 +2,6 @@ version: '3'
 services:
   web:
     build: .
-    image: moshedvora/wog
+    image: imanuelg/worldofgames_part4:v0.1
     ports:
      - "4000:5001"     
