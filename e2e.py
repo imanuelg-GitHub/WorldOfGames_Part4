@@ -6,9 +6,10 @@ def test_scores_service(url):
     Edge_driver.get(url)
     score = Edge_driver.find_element_by_xpath("/html/body/h1")
     Edge_driver.close()
-    if 1 <= int(score) <= 1000:
-        return True
-    return False
+    return int(str(score))
+    #if 1 <= int(score) <= 1000:
+    #    return True
+    #return False
 
 
 def main():
