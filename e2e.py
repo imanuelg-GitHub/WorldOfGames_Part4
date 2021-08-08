@@ -11,11 +11,11 @@ def test_scores_service(url):
     return False
 
 
-def main_function():
+def main():
     if test_scores_service("http://127.0.0.1:8777/"):
         return exit(0)
     else:
         return exit(-1)
 
 
-main_function()
+main()
