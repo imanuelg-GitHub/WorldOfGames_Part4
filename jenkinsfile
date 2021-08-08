@@ -21,19 +21,19 @@ node
         bat 'docker run -dp 8777:5001 --name worldofgames_part4-pipelinecontainer --mount type=bind,source=/c:/dummy,target=/WorldOfGames_Part4/scores  worldofgames_part4-pipeline'
     }
     
-    stage('Test') 
+    stage('Call Python')
     {
         try
         {
-            bat  '"./WorldOfGames_Part4/e2e.py"'
+            bat 'python ./WorldOfGames_Part4/e2e.py' 
         }
-        catch(all)
+        catch(all) 
         {
             bat 'echo "Error Occured in build"'
-            currentBuild.result = 'FAILURE'
             bat 'docker rm -f worldofgames_part4-pipelinecontainer'
+            currentBuild.result = 'FAILURE'
             bat 'exit -1'
-        }
+        }   
     }
     
     if(currentBuild.result != 'FAILURE')
@@ -48,5 +48,5 @@ node
             bat 'docker image rm worldofgames_part4-pipeline'
             bat 'docker image rm imanuelg/worldofgames_part4'
         }
-    }
+    }    
 }
