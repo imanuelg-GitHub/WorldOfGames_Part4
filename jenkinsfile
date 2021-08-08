@@ -42,6 +42,7 @@ node
         {
             bat 'docker tag worldofgames_part4-pipeline imanuelg/worldofgames_part4'
             bat 'docker push imanuelg/worldofgames_part4'
+            
             bat 'docker stop worldofgames_part4-pipelinecontainer'
             bat 'docker rm -f worldofgames_part4-pipelinecontainer'
             bat 'docker image rm worldofgames_part4-pipeline'
