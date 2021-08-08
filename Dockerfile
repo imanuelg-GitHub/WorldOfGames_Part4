@@ -1,10 +1,5 @@
 FROM python:3.8
-
-ADD . /app
-WORKDIR /app
-
+ADD . /WorldOfGames_Part4
+WORKDIR /WorldOfGames_Part4
 RUN pip install -r requirements.txt
-
-ENTRYPOINT ["python"]
-
-CMD ["MainScores.py"]
+CMD ["python", "MainScores.py"]
