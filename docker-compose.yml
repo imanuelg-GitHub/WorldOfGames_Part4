@@ -4,4 +4,4 @@ services:
     build: .
     image: imanuelg/worldofgames_part4:v0.1
     ports:
-     - "4000:5001"     
+     - "6000:5001"     
