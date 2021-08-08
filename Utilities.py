@@ -3,7 +3,7 @@ import requests
 import os
 from requests.exceptions import HTTPError
 
-SCORES_FILE_NAME = "scores.txt"
+SCORES_FILE_NAME = "scores/scores.txt"
 BAD_RETURN_CODE = -1
 
 
