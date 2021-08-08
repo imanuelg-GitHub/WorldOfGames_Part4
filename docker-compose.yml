@@ -1,12 +1,7 @@
 version: '3'
-
 services:
-
-  imanuelg_worldofgames4:
-
+  web:
     build: .
-
     image: imanuelg/worldofgamespart4
-
     ports:
-     - "4000:5001"
+     - "4000:5001"     
