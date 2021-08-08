@@ -1,37 +1,51 @@
-node {
-    stage('Checkout') { 
+node 
+{
+    stage('Clean before we start') 
+    { 
         deleteDir()
-        bat ' git clone https://github.com/imanuelg-GitHub/WorldOfGames.git '
-         
-}
-    
-    stage('Build') {
-        bat ' docker build -t wog-jenkinspipeline  "./app"   '
-        }
-
-    stage('Run') {
-        bat' docker rm -f wog-jenkinspipeline-con '   
-        bat 'docker run -dp 8777:6001 --name wog-jenkinspipeline-con --mount type=bind,source=/c:/tmp,target=/app/  wog-jenkinspipeline'
-
+        bat 'docker rm -f worldofgames_part4-pipelinecontainer'
     }
-    stage('Test') {
-      try{
-         bat  '"./app/e2e.py" '}
-         
-      catch(err){
-           echo "an error occured"
-           bat 'exit 1'
-        }
-      finally {
-        bat  'docker rm -f wog-jenkinspipeline-con '
-     
-      }
-      }
     
-
-    stage('Finalize') {
-         bat  'docker rm -f wog-jenkinspipeline-con '
-         bat  'docker tag wog-jenkinspipeline imanuelg/wog-jenkinspipeline '
-         bat  'docker push imanuelg/wog-jenkinspipeline' 
+    stage('Checkout the repository') 
+    {
+        bat 'git clone https://github.com/imanuelg-GitHub/WorldOfGames_Part4.git'
+    }
+    
+    stage('Build the docker image') 
+    {
+        bat 'docker build -t worldofgames_part4-pipeline  "./WorldOfGames_Part4"'
+    }
+    
+    stage('Run the docker image') 
+    {
+        bat 'docker run -dp 8777:5001 --name worldofgames_part4-pipelinecontainer --mount type=bind,source=/c:/dummy,target=/WorldOfGames_Part4/scores  worldofgames_part4-pipeline'
+    }
+    
+    stage('Test') 
+    {
+        try
+        {
+            bat  '"./WorldOfGames_Part4/e2e.py"'
+        }
+        catch(all)
+        {
+            bat 'echo "Error Occured in build"'
+            currentBuild.result = 'FAILURE'
+            bat 'docker rm -f worldofgames_part4-pipelinecontainer'
+            bat 'exit -1'
+        }
+    }
+    
+    if(currentBuild.result != 'FAILURE')
+    {
+        stage('Final steps')
+        {
+            bat 'docker tag worldofgames_part4-pipeline imanuelg/worldofgames_part4'
+            bat 'docker push imanuelg/worldofgames_part4'
+            bat 'docker stop worldofgames_part4-pipelinecontainer'
+            bat 'docker rm -f worldofgames_part4-pipelinecontainer'
+            bat 'docker image rm worldofgames_part4-pipeline'
+            bat 'docker image rm imanuelg/worldofgames_part4'
+        }
     }
 }
