@@ -12,7 +12,7 @@ MarkupSafe==2.0.1
 msedge-selenium-tools==3.141.3
 pyparsing==2.4.7
 requests==2.26.0
-selenium==3.141.0
 typing==3.7.4.3
 urllib3==1.26.6
 Werkzeug==2.0.1
+selenium
