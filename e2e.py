@@ -1,4 +1,4 @@
-import selenium
+from selenium import webdriver
 
 
 def test_scores_service(url_score_server):
