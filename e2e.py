@@ -1,21 +1,19 @@
-import os
 from selenium import webdriver
 
 
-def test_scores_service():
-    Edge_driver = webdriver.Edge(executable_path="C:/Users/imanu/Downloads/edgedriver_win32/msedgedriver.exe")
-    Edge_driver.get("http://localhost:8777/")
-    score = Edge_driver.find_element_by_tag_name("scores").text
-    if 1 <= int(score) <= 1000:
-        return True
-    return False
+def test_scores_service(url_score_server):
+    chrome_driver = webdriver.Chrome(executable_path="c:/temp/chromedriver.exe")
+    chrome_driver.get(url_score_server)
+    score_result = chrome_driver.find_element_by_id("score").text
+    chrome_driver.close()
+    return int(score_result) in range(1, 1000)
 
 
-def main():
-    if test_scores_service():
-        return 0
+def main_function():
+    if test_scores_service("http://127.0.0.1:8777/"):
+        return exit(0)
     else:
-        os._exit(-1)
+        return exit(-1)
 
 
-main()
+main_function()
